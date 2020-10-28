@@ -1,0 +1,39 @@
+.d {
+    height: 10px;
+    font-size: 10px;
+    line-height: 0;
+}
+
+.b {
+    width: 50%;
+    c:2;
+    a:1;
+}
+
+.c {
+    height: 10px;
+}
+
+.a {
+    width: 100%;
+}
+
+@media (min-witdh: 100px) {
+    .c {
+        color: yellow;
+    }
+    
+    .a {
+        color: green;
+    }    
+}
+
+@media (min-witdh: 200px) {
+    .c {
+        color: blue;
+    }
+    
+    .a {
+        color: violet;
+    }    
+}
