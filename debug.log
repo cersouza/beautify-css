@@ -4,3 +4,12 @@
 [0924/152615.103:ERROR:exit_code_watcher_win.cc(87)] Failed to wait for process exit or stop event
 [0924/152615.284:ERROR:registration_protocol_win.cc(131)] TransactNamedPipe: O pipe foi finalizado. (0x6D)
 [1027/205859.413:ERROR:registration_protocol_win.cc(131)] TransactNamedPipe: O pipe foi finalizado. (0x6D)
+[1117/160603.142:ERROR:exit_code_watcher_win.cc(87)] Failed to wait for process exit or stop event
+[1117/160603.261:ERROR:registration_protocol_win.cc(131)] TransactNamedPipe: O pipe foi finalizado. (0x6D)
+[1118/133630.540:ERROR:registration_protocol_win.cc(131)] TransactNamedPipe: O pipe foi finalizado. (0x6D)
+[1118/155158.303:ERROR:registration_protocol_win.cc(131)] TransactNamedPipe: O pipe foi finalizado. (0x6D)
+[1127/163303.974:ERROR:exit_code_watcher_win.cc(87)] Failed to wait for process exit or stop event
+[1127/163304.215:ERROR:registration_protocol_win.cc(131)] TransactNamedPipe: O pipe foi finalizado. (0x6D)
+[1127/163811.577:ERROR:registration_protocol_win.cc(131)] TransactNamedPipe: O pipe foi finalizado. (0x6D)
+[1203/121620.686:ERROR:registration_protocol_win.cc(131)] TransactNamedPipe: O pipe foi finalizado. (0x6D)
+[0315/221746.353:ERROR:registration_protocol_win.cc(130)] TransactNamedPipe: Le canal de communication a été fermé. (0x6D)

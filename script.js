@@ -16,9 +16,9 @@ function init() {
 function processCSS(textStyles) {
     textStyles = removeUnecessarySpaces(textStyles);
     let specialStylesList = getMediaStyles(textStyles);
-    let simpleSylesList = getOnlySimpleStyles(textStyles, specialStylesList);
+    let simpleStylesList = getOnlySimpleStyles(textStyles, specialStylesList);
 
-    let stylesList = [...simpleSylesList, ...specialStylesList];
+    let stylesList = [...simpleStylesList, ...specialStylesList];
 
     let processedStylesList = processStylesAttr(stylesList);
 
@@ -40,6 +40,7 @@ function getMediaStyles(stylesText) {
 
 function getOnlySimpleStyles(stylesText, specialStylesList) {
 
+    // Remove @media
     if (specialStylesList && Array.isArray(specialStylesList)) {
         specialStylesList.forEach((style) => {
             stylesText = stylesText.replace(style[0], '');
@@ -48,18 +49,32 @@ function getOnlySimpleStyles(stylesText, specialStylesList) {
 
     let anyBreakLineAOrSpace_afterClosedCurlyBracket = /(?<=\})[\n\s]*/;
     let splitedText = stylesText.split(anyBreakLineAOrSpace_afterClosedCurlyBracket);
-    return splitedText;
+    let trimedText = splitedText.map((text) => text.trim());
+    return trimedText;
 }
 
 function processStylesAttr(stylesList) {
     let processedStylesList = stylesList.map((style) => {
-        let styleProcessed = style;
+        let styleProcessed = Array.isArray(style) ? style[0] : style;
 
-        if(!/@/.test(style)) {
-           styleProcessed = organizeAttrList(style);
+        if(/@/.test(styleProcessed)) {
+            let firstCurlyBracket = styleProcessed.indexOf(`{`);
+            let lastCurlyBracket = styleProcessed.lastIndexOf(`}`);
+            let styleMediaAtributes = styleProcessed.slice(firstCurlyBracket + 1, lastCurlyBracket);
+            let styleMediaAtributesList = getOnlySimpleStyles(styleMediaAtributes);
+            
+            var styleMediaAtributesListProcessed = styleMediaAtributesList.map((styleMedia) => {
+                return organizeAttrList(styleMedia);
+            });
+
+            styleProcessed = styleProcessed.replace(styleMediaAtributes, `\n${styleMediaAtributesListProcessed.sort().join(`\n\n`)}\n`);
+
+        } else {
+            styleProcessed = organizeAttrList(style);
         }
 
-        return styleProcessed;
+        if (style)
+            return styleProcessed;
     });
 
     return processedStylesList;
@@ -67,7 +82,7 @@ function processStylesAttr(stylesList) {
 
 function organizeAttrList(style) {
     let firstCurlyBracket = style.indexOf(`{`);
-    let lastCurlyBracket = style.lastIndexOf(`}`)
+    let lastCurlyBracket = style.lastIndexOf(`}`);
     let styleAtributes = style.slice(firstCurlyBracket + 1, lastCurlyBracket);
 
     let atributesList = styleAtributes.match(/\w.*?(?=;)/g) || [];

@@ -20,10 +20,13 @@
 
 @media (min-witdh: 100px) {
     .c {
+        width: 100px;
         color: yellow;
+        height: 10%;
     }
     
     .a {
+        text-align: center;
         color: green;
     }    
 }
